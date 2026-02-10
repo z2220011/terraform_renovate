@@ -2,7 +2,7 @@
 
 このリポジトリは、**Renovate**を使用してTerraformとAWSプロバイダーのバージョンを自動的にアップデートする仕組みを備えています。
 
-## 📁 ディレクトリ構造
+## ディレクトリ構造
 
 ```
 terraform/
@@ -23,18 +23,18 @@ terraform/
 └── renovate.json                         # Renovate設定ファイル
 ```
 
-## 🤖 Renovateとは
+## Renovateとは
 
 [Renovate](https://github.com/renovatebot/renovate)は、依存関係を自動的に更新してPull Requestを作成するツールです。
 
 ### メリット
-- ✅ 標準的なツール（保守性が高い）
-- ✅ 設定ファイルのみで動作（スクリプト不要）
-- ✅ GitHub Apps統合で簡単にセットアップ
-- ✅ Terraform以外の依存関係も管理可能
-- ✅ セキュリティアラートにも対応
+- 標準的なツール（保守性が高い）
+- 設定ファイルのみで動作（スクリプト不要）
+- GitHub Apps統合で簡単にセットアップ
+- Terraform以外の依存関係も管理可能
+- セキュリティアラートにも対応
 
-## 🚀 セットアップ手順
+## セットアップ手順
 
 ### 1. GitHubリポジトリの準備
 
@@ -70,7 +70,7 @@ Renovateが正常に動作すると、以下のようなPRが自動作成され�
 - `Update AWS Provider (Dev) to v5.x.x`
 - `Update Terraform lock files`
 
-## ⚙️ Renovate設定の詳細
+## Renovate設定の詳細
 
 ### 自動アップデートの仕組み
 
@@ -101,7 +101,7 @@ Renovateが正常に動作すると、以下のようなPRが自動作成され�
 | AWS Provider (Dev) | `Update AWS Provider (Dev) to v5.x.x` | `aws-provider`, `dev-environment` | 高 |
 | AWS Provider (Prod) | `Update AWS Provider (Prod) to v5.x.x` | `aws-provider`, `prod-environment`, `needs-careful-review` | 中 |
 
-## 📋 バージョンアップの承認フロー
+## バージョンアップの承認フロー
 
 ### 推奨フロー
 
@@ -131,7 +131,7 @@ Renovateが正常に動作すると、以下のようなPRが自動作成され�
    - より慎重にレビュー
    - 必要に応じてステージング環境でテスト
 
-## ✅ テストチェックリスト
+## テストチェックリスト
 
 各PRには以下のチェックリストが自動追加されます:
 
@@ -142,7 +142,7 @@ Renovateが正常に動作すると、以下のようなPRが自動作成され�
 - [ ] (任意) Dev環境で実際にapply
 - [ ] Dev検証後、Prodに適用
 
-## 🔧 カスタマイズ方法
+## カスタマイズ方法
 
 ### 実行頻度の変更
 
@@ -204,7 +204,7 @@ terraform {
 }
 ```
 
-## 🔍 トラブルシューティング
+## トラブルシューティング
 
 ### Renovateが動作しない
 
@@ -234,7 +234,7 @@ terraform {
 - Settings → Actions → General → Workflow permissions
 - "Read and write permissions" を選択
 
-## 🆚 Renovate vs 自作スクリプト
+## Renovate vs 自作スクリプト
 
 | 項目 | Renovate | 自作スクリプト |
 |-----|----------|---------------|
@@ -244,14 +244,14 @@ terraform {
 | カスタマイズ | JSON設定で柔軟 | コード修正が必要 |
 | コスト | 無料 | 無料 |
 
-## 📚 参考資料
+## 参考資料
 
 - [Renovate Documentation](https://docs.renovatebot.com/)
 - [Renovate Terraform Manager](https://docs.renovatebot.com/modules/manager/terraform/)
 - [Configuration Options](https://docs.renovatebot.com/configuration-options/)
 - [Preset Configs](https://docs.renovatebot.com/presets-config/)
 
-## 🎯 次のステップ
+## 次のステップ
 
 1. **GitHubリポジトリを作成してpush**
 2. **Renovate GitHub Appをインストール**
