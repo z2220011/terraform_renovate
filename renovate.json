@@ -1,0 +1,181 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "labels": [
+    "terraform",
+    "dependencies",
+    "renovate"
+  ],
+  "timezone": "Asia/Tokyo",
+  "schedule": [
+    "before 10am on Monday"
+  ],
+  "prConcurrentLimit": 3,
+  "prHourlyLimit": 0,
+  "separateMinorPatch": true,
+  "assigneesFromCodeOwners": true,
+  "reviewersFromCodeOwners": true,
+  "terraform": {
+    "enabled": true,
+    "fileMatch": [
+      "\\.tf$"
+    ]
+  },
+  "packageRules": [
+    {
+      "description": "Terraform version updates - Dev environment first",
+      "matchDatasources": [
+        "terraform-version"
+      ],
+      "matchFileNames": [
+        "environment/dev/**"
+      ],
+      "groupName": "Terraform (Dev)",
+      "schedule": [
+        "before 10am on Monday"
+      ],
+      "automerge": false,
+      "commitMessageTopic": "Terraform (Dev)",
+      "commitMessageExtra": "to {{newVersion}}",
+      "prPriority": 10,
+      "labels": [
+        "terraform",
+        "dev-environment"
+      ]
+    },
+    {
+      "description": "Terraform version updates - Prod environment",
+      "matchDatasources": [
+        "terraform-version"
+      ],
+      "matchFileNames": [
+        "environment/prod/**"
+      ],
+      "groupName": "Terraform (Prod)",
+      "schedule": [
+        "before 10am on Monday"
+      ],
+      "automerge": false,
+      "commitMessageTopic": "Terraform (Prod)",
+      "commitMessageExtra": "to {{newVersion}}",
+      "prPriority": 5,
+      "labels": [
+        "terraform",
+        "prod-environment",
+        "needs-careful-review"
+      ],
+      "dependsOn": [
+        "Terraform (Dev)"
+      ]
+    },
+    {
+      "description": "AWS provider updates - Dev environment first",
+      "matchDatasources": [
+        "terraform-provider"
+      ],
+      "matchPackageNames": [
+        "hashicorp/aws"
+      ],
+      "matchFileNames": [
+        "environment/dev/**"
+      ],
+      "groupName": "AWS Provider (Dev)",
+      "schedule": [
+        "before 10am on Monday"
+      ],
+      "automerge": false,
+      "commitMessageTopic": "AWS Provider (Dev)",
+      "commitMessageExtra": "to {{newVersion}}",
+      "prPriority": 9,
+      "labels": [
+        "aws-provider",
+        "dev-environment"
+      ]
+    },
+    {
+      "description": "AWS provider updates - Prod environment",
+      "matchDatasources": [
+        "terraform-provider"
+      ],
+      "matchPackageNames": [
+        "hashicorp/aws"
+      ],
+      "matchFileNames": [
+        "environment/prod/**"
+      ],
+      "groupName": "AWS Provider (Prod)",
+      "schedule": [
+        "before 10am on Monday"
+      ],
+      "automerge": false,
+      "commitMessageTopic": "AWS Provider (Prod)",
+      "commitMessageExtra": "to {{newVersion}}",
+      "prPriority": 4,
+      "labels": [
+        "aws-provider",
+        "prod-environment",
+        "needs-careful-review"
+      ]
+    },
+    {
+      "description": "Other Terraform providers",
+      "matchDatasources": [
+        "terraform-provider"
+      ],
+      "excludePackageNames": [
+        "hashicorp/aws"
+      ],
+      "groupName": "Terraform Providers",
+      "schedule": [
+        "before 10am on Monday"
+      ]
+    },
+    {
+      "description": "Terraform modules updates",
+      "matchDatasources": [
+        "terraform-module"
+      ],
+      "groupName": "Terraform Modules",
+      "schedule": [
+        "before 10am on Monday"
+      ]
+    },
+    {
+      "description": "Auto-merge minor and patch updates for dev environment",
+      "matchFileNames": [
+        "environment/dev/**"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "squash",
+      "platformAutomerge": true
+    }
+  ],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": [
+      "before 10am on Monday"
+    ],
+    "commitMessageAction": "Update",
+    "commitMessageTopic": "Terraform lock files"
+  },
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "labels": [
+      "security",
+      "urgent"
+    ],
+    "assignees": [],
+    "reviewers": []
+  },
+  "prBodyTemplate": "{{{header}}}{{{table}}}{{{warnings}}}{{{notes}}}{{{changelogs}}}{{{configDescription}}}{{{controls}}}{{{footer}}}",
+  "prBodyDefinitions": {
+    "Notes": "## Testing Checklist\n\n- [ ] Review version changes and release notes\n- [ ] Run `terraform init -upgrade` in dev environment\n- [ ] Run `terraform plan` in dev environment\n- [ ] Verify no breaking changes\n- [ ] (Optional) Test apply in dev environment\n- [ ] After dev verification, apply to prod\n\n---\n🤖 This PR was automatically created by Renovate."
+  }
+}
