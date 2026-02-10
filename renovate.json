@@ -15,8 +15,6 @@
   "prConcurrentLimit": 3,
   "prHourlyLimit": 0,
   "separateMinorPatch": true,
-  "assigneesFromCodeOwners": true,
-  "reviewersFromCodeOwners": true,
   "terraform": {
     "enabled": true,
     "fileMatch": [
@@ -65,9 +63,6 @@
         "terraform",
         "prod-environment",
         "needs-careful-review"
-      ],
-      "dependsOn": [
-        "Terraform (Dev)"
       ]
     },
     {
@@ -165,17 +160,8 @@
     "commitMessageAction": "Update",
     "commitMessageTopic": "Terraform lock files"
   },
-  "vulnerabilityAlerts": {
-    "enabled": true,
-    "labels": [
-      "security",
-      "urgent"
-    ],
-    "assignees": [],
-    "reviewers": []
-  },
   "prBodyTemplate": "{{{header}}}{{{table}}}{{{warnings}}}{{{notes}}}{{{changelogs}}}{{{configDescription}}}{{{controls}}}{{{footer}}}",
   "prBodyDefinitions": {
-    "Notes": "## Testing Checklist\n\n- [ ] Review version changes and release notes\n- [ ] Run `terraform init -upgrade` in dev environment\n- [ ] Run `terraform plan` in dev environment\n- [ ] Verify no breaking changes\n- [ ] (Optional) Test apply in dev environment\n- [ ] After dev verification, apply to prod\n\n---\n🤖 This PR was automatically created by Renovate."
+    "Notes": "## Testing Checklist\n\n- [ ] Review version changes and release notes\n- [ ] Run `terraform init -upgrade` in dev environment\n- [ ] Run `terraform plan` in dev environment\n- [ ] Verify no breaking changes\n- [ ] (Optional) Test apply in dev environment\n- [ ] After dev verification, apply to prod\n\n---\nThis PR was automatically created by Renovate."
   }
 }
